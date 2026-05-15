@@ -12,6 +12,22 @@
     // Counter for dynamic rows
     let bodyPartIndex = 1;
 
+    // GA4 tracking
+    let calculatorInteracted = false;
+
+    function trackCalculatorStart(stateValue) {
+        if (!calculatorInteracted) {
+            if (typeof gtag === 'function') {
+                gtag('event', 'calculator_start', {
+                    'page_title': document.title,
+                    'page_location': window.location.href,
+                    'state_calculator': stateValue || ''
+                });
+            }
+            calculatorInteracted = true;
+        }
+    }
+
     /**
      * Initialize calculator when DOM is ready
      */
@@ -52,6 +68,14 @@
 
         // Initialize Custom Select
         initCustomSelect();
+
+        // GA4 - calculator_start listeners
+        $(document).on('focus change', '.wcc-input', function () {
+            trackCalculatorStart($('#wcc-state').val());
+        });
+        $(document).on('click', '.wcc-select-trigger', function () {
+            trackCalculatorStart($('#wcc-state').val());
+        });
     }
 
     /**
@@ -550,6 +574,16 @@
                     $('.wcc-wizard-step').hide();
 
                     displayResults(response.data);
+
+                    // GA4 - calculator_complete
+                    if (typeof gtag === 'function') {
+                        gtag('event', 'calculator_complete', {
+                            'page_title': document.title,
+                            'page_location': window.location.href,
+                            'state_calculator': formData.state || ''
+                        });
+                    }
+
                     // Scroll to results
                     $('html, body').animate({
                         scrollTop: $('#wcc-results').offset().top - 50
