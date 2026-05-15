@@ -1,0 +1,1456 @@
+/**
+ * Workers' Comp Calculator Styles
+ * Modern, Premium, & Mobile-First
+ */
+
+/* ============================================
+   Variables & Theme
+   ============================================ */
+:root {
+    /* Brand Colors */
+    --wcc-brand-primary: #8D1C34;
+    /* Brand Red */
+    --wcc-brand-secondary: #2d3436;
+    /* Dark Grey */
+    --wcc-text-main: #1e293b;
+    /* Darker Slate */
+    --wcc-text-muted: #475569;
+    /* Darker Muted for readability */
+    --wcc-bg-body: #f8f9fc;
+    --wcc-bg-card: #ffffff;
+
+    /* Functional Colors */
+    --wcc-col-success: #10b981;
+    --wcc-col-error: #ef4444;
+    --wcc-col-border: #e2e8f0;
+    --wcc-col-border-focus: #8D1C34;
+
+    /* Spacing & Sizing */
+    --wcc-radius-lg: 16px;
+    --wcc-radius-md: 12px;
+    --wcc-radius-sm: 8px;
+    --wcc-space-xs: 8px;
+    --wcc-space-sm: 16px;
+    --wcc-space-md: 32px;
+    /* Increased from 24px for breathing room */
+    --wcc-space-lg: 32px;
+
+    /* Shadows */
+    --wcc-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    --wcc-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --wcc-shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+
+    /* Transitions */
+    --wcc-trans-fast: 0.2s ease;
+    --wcc-trans-med: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   Container & Reset
+   ============================================ */
+.wcc-calculator-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 60px 20px;
+    /* Force vertical spacing */
+    background: transparent;
+    /* Fallback */
+    min-height: auto;
+    /* Let content dictate height */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    /* Prevent stretching */
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    box-sizing: border-box;
+}
+
+.wcc-calculator-container * {
+    box-sizing: border-box;
+}
+
+.wcc-calculator-card {
+    width: 100%;
+    max-width: 680px;
+    background: var(--wcc-bg-card);
+    border-radius: var(--wcc-radius-lg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e2e8f0;
+    /* Distinct border */
+    overflow: hidden;
+    position: relative;
+    animation: wccSlideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+    transform: translateY(20px);
+    margin: 0 auto;
+    /* Center alignment */
+}
+
+@keyframes wccSlideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.wcc-header {
+    background: #043144;
+    padding: var(--wcc-space-lg);
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.wcc-header::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(141, 28, 52, 0.1));
+    pointer-events: none;
+}
+
+.wcc-header-content {
+    flex: 1;
+    z-index: 2;
+}
+
+.wcc-header-icon {
+    width: 180px;
+    height: 48px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: var(--wcc-space-md);
+    color: var(--wcc-brand-primary);
+    flex-shrink: 0;
+}
+
+.wcc-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px 0;
+    line-height: 1.2;
+}
+
+.wcc-subtitle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    font-weight: 400;
+}
+
+/* ============================================
+   Step Indicator
+   ============================================ */
+/* ============================================
+   Step Indicator
+   ============================================ */
+.wcc-step-indicator {
+    padding: var(--wcc-space-md) var(--wcc-space-lg);
+    background: #f8f9fc;
+    border-bottom: 1px solid var(--wcc-col-border);
+}
+
+.wcc-step-bar {
+    height: 6px;
+    background: #e2e8f0;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    overflow: hidden;
+    position: relative;
+}
+
+.wcc-step-progress {
+    height: 100%;
+    background: var(--wcc-brand-primary);
+    border-radius: 3px;
+    transition: width 0.4s ease;
+}
+
+.wcc-step-labels {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wcc-step-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--wcc-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: color 0.3s;
+}
+
+.wcc-step-label.active {
+    color: var(--wcc-brand-primary);
+}
+
+/* Wizard Animations */
+.wcc-wizard-step {
+    animation: wccFadeIn 0.3s ease;
+}
+
+@keyframes wccFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================================
+   Form Layout
+   ============================================ */
+.wcc-form {
+    padding: 0;
+}
+
+.wcc-form-section,
+.wcc-contact-section {
+    padding: var(--wcc-space-lg);
+    border-bottom: 1px solid var(--wcc-col-border);
+}
+
+.wcc-contact-section {
+    border-bottom: none;
+    /* Last section doesn't need border */
+    background: #f8f9fc;
+    /* Slight contrast for contact info */
+}
+
+.wcc-section-heading {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--wcc-text-muted);
+    margin: 0 0 var(--wcc-space-md) 0;
+    display: flex;
+    align-items: center;
+}
+
+.wcc-section-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--wcc-col-border);
+    margin-left: 12px;
+}
+
+.wcc-grid-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--wcc-space-md);
+    margin-bottom: 28px;
+    /* Ensure spacing after grid */
+}
+
+.wcc-field-group {
+    margin-bottom: 28px;
+    /* Specific field spacing */
+    position: relative;
+}
+
+.wcc-field-group:last-child {
+    margin-bottom: 0;
+}
+
+.wcc-section-separator {
+    height: 1px;
+    background: var(--wcc-col-border);
+    margin: 32px 0;
+    width: 100%;
+}
+
+/* ============================================
+   Inputs & Labels
+   ============================================ */
+.wcc-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wcc-text-main);
+    margin-bottom: 8px;
+}
+
+.wcc-required {
+    color: var(--wcc-brand-primary);
+}
+
+.wcc-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.wcc-input,
+.wcc-select,
+.wcc-textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 16px;
+    color: var(--wcc-text-main);
+    color: var(--wcc-text-main);
+    background: #f1f5f9;
+    /* Light grey background for contrast */
+    border: 2px solid transparent;
+    /* No border initially */
+    border-radius: var(--wcc-radius-md);
+    transition: all 0.2s ease;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-weight: 500;
+}
+
+.wcc-input:hover,
+.wcc-select:hover,
+.wcc-textarea:hover {
+    background: #e2e8f0;
+}
+
+.wcc-input:focus,
+.wcc-select:focus,
+.wcc-textarea:focus {
+    background: #fff;
+    border-color: var(--wcc-brand-primary);
+    box-shadow: 0 0 0 4px rgba(141, 28, 52, 0.15);
+}
+
+/* Icon Handling for inputs */
+.wcc-input-wrapper.with-icon .wcc-input {
+    padding-left: 44px;
+}
+
+.wcc-input-wrapper.with-prefix .wcc-input {
+    padding-left: 36px;
+}
+
+.wcc-input-wrapper.with-suffix .wcc-input {
+    padding-right: 36px;
+}
+
+.wcc-input-icon,
+.wcc-input-prefix,
+.wcc-icon-select {
+    position: absolute;
+    left: 14px;
+    color: var(--wcc-text-muted);
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+}
+
+.wcc-icon-select {
+    left: auto;
+    right: 14px;
+}
+
+.wcc-input-suffix {
+    position: absolute;
+    right: 14px;
+    color: var(--wcc-text-muted);
+    pointer-events: none;
+    font-weight: 500;
+}
+
+/* Hover & Focus States */
+.wcc-input:hover,
+.wcc-select:hover,
+.wcc-textarea:hover {
+    border-color: #cbd5e1;
+}
+
+.wcc-input:focus,
+.wcc-select:focus,
+.wcc-textarea:focus {
+    border-color: var(--wcc-brand-primary);
+    box-shadow: 0 0 0 4px rgba(141, 28, 52, 0.1);
+}
+
+/* Error States */
+.wcc-input.error,
+.wcc-select.error,
+.wcc-checkbox-wrapper.error {
+    border-color: var(--wcc-col-error);
+    background-color: #fef2f2;
+}
+
+.wcc-error-message {
+    color: var(--wcc-col-error);
+    font-size: 12px;
+    margin-top: 6px;
+    display: none;
+    animation: wccShake 0.4s ease-in-out;
+}
+
+.wcc-error-message.show {
+    display: block;
+}
+
+@keyframes wccShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    75% {
+        transform: translateX(4px);
+    }
+}
+
+.wcc-help-text {
+    font-size: 12px;
+    color: var(--wcc-text-muted);
+    margin-top: 6px;
+    display: block;
+}
+
+/* ============================================
+   Toggle & Checkbox Customization
+   ============================================ */
+.wcc-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 16px;
+    background: #f8fafc;
+    border: 2px solid var(--wcc-col-border);
+    border-radius: var(--wcc-radius-md);
+    transition: var(--wcc-trans-fast);
+    margin-bottom: 32px;
+    /* Extra space before button */
+}
+
+.wcc-toggle-wrapper:hover {
+    border-color: #cbd5e1;
+}
+
+.wcc-toggle-input {
+    display: none;
+}
+
+.wcc-toggle-slider {
+    width: 48px;
+    height: 26px;
+    background: #e2e8f0;
+    border-radius: 20px;
+    position: relative;
+    transition: 0.3s;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+.wcc-toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.wcc-toggle-input:checked+.wcc-toggle-slider {
+    background: var(--wcc-brand-primary);
+}
+
+.wcc-toggle-input:checked+.wcc-toggle-slider::before {
+    transform: translateX(22px);
+}
+
+.wcc-toggle-label-text {
+    font-weight: 500;
+    color: var(--wcc-text-main);
+}
+
+/* Custom Checkbox */
+.wcc-checkbox-group {
+    margin-top: 24px;
+}
+
+.wcc-checkbox-wrapper {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+}
+
+.wcc-checkbox {
+    display: none;
+}
+
+.wcc-checkbox-custom {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--wcc-col-border);
+    border-radius: 6px;
+    margin-right: 12px;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    transition: 0.2s;
+    color: white;
+    flex-shrink: 0;
+}
+
+.wcc-checkbox:checked+.wcc-checkbox-custom {
+    background: var(--wcc-brand-primary);
+    border-color: var(--wcc-brand-primary);
+}
+
+.wcc-checkbox-custom svg {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.wcc-checkbox:checked+.wcc-checkbox-custom svg {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.wcc-checkbox-text {
+    font-size: 14px;
+    color: var(--wcc-text-muted);
+    line-height: 1.5;
+}
+
+/* ============================================
+   Autocomplete Suggestions
+   ============================================ */
+.wcc-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid var(--wcc-col-border);
+    border-radius: 0 0 var(--wcc-radius-md) var(--wcc-radius-md);
+    max-height: 240px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: var(--wcc-shadow-lg);
+    display: none;
+    margin-top: 4px;
+}
+
+.wcc-suggestion-item {
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.1s;
+	color: #043144;
+}
+
+.wcc-suggestion-item:hover,
+.wcc-suggestion-item.active {
+    background: #f1f5f9;
+    color: var(--wcc-brand-primary);
+}
+
+/* ============================================
+   Submit Section
+   ============================================ */
+.wcc-submit-group {
+    padding: var(--wcc-space-lg);
+    background: #f8f9fc;
+    margin: 0;
+    border-top: 1px solid var(--wcc-col-border);
+}
+
+.wcc-submit-btn {
+    width: 100%;
+    padding: 16px 24px;
+    padding: 18px 28px;
+    background: linear-gradient(135deg, #8D1C34 0%, #a52240 100%);
+    color: white;
+    border: none;
+    border-radius: var(--wcc-radius-md);
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 15px -3px rgba(141, 28, 52, 0.4), 0 4px 6px -2px rgba(141, 28, 52, 0.2);
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.wcc-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 25px -5px rgba(141, 28, 52, 0.5), 0 10px 10px -5px rgba(141, 28, 52, 0.3);
+    background: linear-gradient(135deg, #a52240 0%, #8D1C34 100%);
+}
+
+.wcc-submit-btn:active {
+    transform: translateY(0);
+}
+
+.wcc-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* ============================================
+   Buttons & Navigation
+   ============================================ */
+.wcc-nav-group {
+    display: flex;
+    gap: 16px;
+    margin-top: 24px;
+}
+
+.wcc-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: var(--wcc-radius-md);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    outline: none;
+}
+
+.wcc-btn-primary {
+    background: var(--wcc-brand-primary);
+    color: white;
+    box-shadow: 0 4px 6px rgba(141, 28, 52, 0.2);
+}
+
+.wcc-btn-primary:hover {
+    background: #7a1829;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 8px rgba(141, 28, 52, 0.3);
+}
+
+.wcc-btn-secondary {
+    background: #fff;
+    color: var(--wcc-text-muted);
+    border: 2px solid var(--wcc-col-border);
+}
+
+.wcc-btn-secondary:hover {
+    background: #f1f5f9;
+    color: var(--wcc-text-main);
+    border-color: #cbd5e1;
+}
+
+/* Specific button positioning */
+.wcc-next-btn {
+    width: 100%;
+}
+
+.wcc-back-btn {
+    width: auto;
+}
+
+#wcc-submit-btn {
+    flex: 1;
+}
+
+/* Spinner */
+.wcc-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: wccSpin 0.8s linear infinite;
+}
+
+@keyframes wccSpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ============================================
+   Results Section
+   ============================================ */
+/* ============================================
+   Results Section (Premium Redesign)
+   ============================================ */
+.wcc-results {
+    padding: var(--wcc-space-lg);
+    background: transparent;
+    /* Card handles background */
+    animation: wccExpand 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.wcc-results-card {
+    background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+    border-radius: 20px;
+    padding: 40px;
+    width: 100%;
+    max-width: 500px;
+    /* Focus attention */
+    text-align: center;
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle glow effect behind */
+.wcc-results-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(141, 28, 52, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.wcc-result-header {
+    margin-bottom: 24px;
+}
+
+.wcc-result-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+
+.wcc-results-title {
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #94a3b8;
+    font-weight: 600;
+    margin: 0;
+}
+
+.wcc-valuation-range {
+    margin-bottom: 32px;
+    position: relative;
+}
+
+.wcc-valuation-amount {
+    font-size: 42px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+/* Make the dash in range white (hacky but effective if needed, otherwise gradient covers it) */
+
+.wcc-valuation-label {
+    font-size: 14px;
+    color: var(--wcc-brand-primary);
+    font-weight: 500;
+}
+
+.wcc-result-context {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 24px;
+    margin-bottom: 32px;
+}
+
+.wcc-result-context p {
+    font-size: 14px;
+    color: #64748b;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.wcc-result-context strong {
+    color: #cbd5e1;
+}
+
+.wcc-cta-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 18px;
+    background: var(--wcc-brand-primary);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(141, 28, 52, 0.3);
+}
+
+.wcc-cta-button:hover {
+    background: #a52240;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(141, 28, 52, 0.4);
+    color: #fff;
+}
+
+.wcc-cta-subtext {
+    font-size: 12px;
+    color: #64748b;
+    margin-top: 12px;
+}
+
+@keyframes wccExpand {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ============================================
+   Conditional Logic Animations
+   ============================================ */
+.wcc-conditional-field {
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+/* ============================================
+   Mobile Responsiveness
+   ============================================ */
+@media screen and (max-width: 640px) {
+    .wcc-calculator-container {
+        padding: 0;
+        background: var(--wcc-bg-card);
+    }
+
+    .wcc-calculator-card {
+        border-radius: 0;
+        box-shadow: none;
+        min-height: 100vh;
+    }
+
+    .wcc-header {
+        padding: 24px;
+    }
+
+    .wcc-title {
+        font-size: 20px;
+    }
+
+    .wcc-form-section {
+        padding: 24px;
+    }
+
+    .wcc-grid-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .wcc-input,
+    .wcc-select,
+    .wcc-submit-btn {
+        min-height: 52px;
+        /* Touch target */
+    }
+}
+
+/* ============================================
+   Repeater Fields Styling (New)
+   ============================================ */
+.wcc-body-part-row {
+    position: relative;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 24px 16px 16px 16px;
+    /* Top padding for labels */
+    margin-bottom: 16px;
+    transition: all 0.2s ease;
+}
+
+.wcc-body-part-row:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.wcc-remove-row-btn {
+    position: absolute;
+    top: 8px !important;
+    right: 8px !important;
+    left: auto !important;
+    bottom: auto !important;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #fee2e2;
+    background: #fff;
+    color: #ef4444;
+    border-radius: 50%;
+    /* Circle */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+    opacity: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* User's screenshot shows the 'x' button separate from the fields, on top. 
+   I will make the row a card, and put the X inside it at the top right. */
+
+.wcc-remove-row-btn:hover {
+    background: #fecaca;
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.wcc-remove-row-btn svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 3;
+}
+
+#wcc-add-body-part {
+    width: 100%;
+    background: #fff;
+    border: 2px dashed #cbd5e1;
+    color: #64748b;
+    justify-content: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+#wcc-add-body-part:hover {
+    border-color: var(--wcc-brand-primary);
+    color: var(--wcc-brand-primary);
+    background: #fff7ed;
+}
+
+/* Adjust grid for repeater to be tighter */
+.wcc-body-part-row .wcc-grid-row {
+    margin-bottom: 0;
+    gap: 16px;
+}
+
+/* ============================================
+   jQuery UI Datepicker Customization
+   ============================================ */
+#ui-datepicker-div {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 0.9rem !important;
+    border: none !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1) !important;
+    border-radius: 12px !important;
+    padding: 12px !important;
+    width: 300px !important;
+    /* Compact fixed width */
+    z-index: 9999 !important;
+    background: #fff !important;
+    margin-top: 4px;
+    /* Spacing from input */
+}
+
+/* Header */
+.ui-datepicker-header {
+    background: #fff !important;
+    border: none !important;
+    color: var(--wcc-text-main) !important;
+    padding: 12px 0 !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    border-radius: 0 !important;
+    position: relative !important;
+}
+
+.ui-datepicker-title {
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+    top: 50% !important;
+    transform: translateY(-50%);
+    width: 32px !important;
+    height: 32px !important;
+    border: none !important;
+    background: transparent !important;
+    cursor: pointer !important;
+    opacity: 0.7;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.ui-datepicker-prev {
+    left: 8px !important;
+}
+
+.ui-datepicker-next {
+    right: 8px !important;
+}
+
+.ui-datepicker-prev:hover,
+.ui-datepicker-next:hover {
+    background: #f1f5f9 !important;
+    border: none !important;
+    opacity: 1;
+    border-radius: 6px;
+}
+
+/* Remove default icons and use pure CSS arrows if needed or standard icons */
+.ui-datepicker-prev span,
+.ui-datepicker-next span {
+    filter: grayscale(100%);
+}
+
+
+/* Calendar Table */
+.ui-datepicker-calendar {
+    margin: 0 !important;
+    border-collapse: separate !important;
+    border-spacing: 2px !important;
+}
+
+.ui-datepicker th {
+    font-weight: 600 !important;
+    font-size: 12px !important;
+    color: #94a3b8 !important;
+    text-transform: uppercase !important;
+    padding: 8px 0 !important;
+}
+
+.ui-datepicker td {
+    padding: 0 !important;
+}
+
+/* Days */
+.ui-state-default,
+.ui-widget-content .ui-state-default {
+    background: #fff !important;
+    border: none !important;
+    color: var(--wcc-text-main) !important;
+    text-align: center !important;
+    padding: 8px !important;
+    font-weight: 500 !important;
+    border-radius: 6px !important;
+    transition: all 0.2s !important;
+}
+
+.ui-state-default:hover {
+    background: #f1f5f9 !important;
+    color: var(--wcc-brand-primary) !important;
+}
+
+/* Active / Selected */
+.ui-state-active,
+.ui-widget-content .ui-state-active,
+.ui-state-highlight,
+.ui-widget-content .ui-state-highlight {
+    background: var(--wcc-brand-primary) !important;
+    color: #fff !important;
+    font-weight: 700 !important;
+    box-shadow: 0 4px 6px rgba(141, 28, 52, 0.25) !important;
+}
+
+/* Fix Year/Month Dropdowns if present */
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year {
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;
+    padding: 2px 4px !important;
+    margin: 0 2px !important;
+    height: auto !important;
+}
+
+/* ============================================
+   Premium Toggle Redesign
+   ============================================ */
+.wcc-toggle-wrapper {
+    background: #fff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    margin-bottom: 24px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
+    transition: all 0.2s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    cursor: pointer !important;
+}
+
+.wcc-toggle-wrapper:hover {
+    border-color: #cbd5e1 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Active State styling (needs JS class or peer selector, 
+   but since input is inside label, we can use :focus-within or just style the slider well) */
+
+.wcc-toggle-slider {
+    width: 44px !important;
+    height: 24px !important;
+    background: #e2e8f0 !important;
+    border-radius: 30px !important;
+    position: relative !important;
+    transition: 0.3s !important;
+    margin-right: 16px !important;
+    flex-shrink: 0 !important;
+}
+
+.wcc-toggle-slider::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 18px !important;
+    height: 18px !important;
+    left: 3px !important;
+    bottom: 3px !important;
+    background: white !important;
+    border-radius: 50% !important;
+    transition: 0.3s !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.wcc-toggle-input:checked+.wcc-toggle-slider {
+    background: var(--wcc-brand-primary) !important;
+}
+
+.wcc-toggle-input:checked+.wcc-toggle-slider::before {
+    transform: translateX(20px) !important;
+}
+
+.wcc-toggle-label-text {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: var(--wcc-text-main) !important;
+    flex: 1;
+    /* Take remaining space */
+}
+
+/* Add an icon to the text? */
+/* The HTML doesn't have an icon hook, but I can use ::before on the text span if I knew which one was which. */
+/* .wcc-toggle-label-text::before { font-family: ... } */
+/* Let's keep it clean for now. */
+
+/* Highlight wrapper when checked? 
+   Hard with just CSS unless we use :has() which is modern.
+   Let's try :has() for modern browsers, fallback is fine without it. */
+.wcc-toggle-wrapper:has(:checked) {
+    border-color: var(--wcc-brand-primary) !important;
+    background: #fff7ed !important;
+    /* Very light orange tint */
+}
+
+/* ============================================
+   Custom Searchable Dropdown
+   ============================================ */
+.wcc-custom-select {
+    position: relative;
+    width: 100%;
+}
+
+.wcc-select-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 16px;
+    background: #fff;
+    border: 2px solid transparent;
+    /* Match input style */
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--wcc-text-main);
+    cursor: pointer;
+    background: #f1f5f9;
+    transition: all 0.2s ease;
+}
+
+.wcc-select-trigger:hover {
+    background: #e2e8f0;
+    border-color: #cbd5e1;
+}
+
+.wcc-select-trigger.active {
+    background: #fff;
+    border-color: var(--wcc-brand-primary);
+    box-shadow: 0 0 0 4px rgba(141, 28, 52, 0.15);
+}
+
+.wcc-select-trigger span.placeholder {
+    color: var(--wcc-text-muted);
+}
+
+.wcc-select-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+    overflow: hidden;
+    animation: wccFadeIn 0.2s ease;
+}
+
+.wcc-select-dropdown.open {
+    display: block;
+}
+
+.wcc-select-search-wrapper {
+    padding: 12px;
+    border-bottom: 1px solid #f1f5f9;
+    background: #fff;
+}
+
+.wcc-select-search {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: 0.2s;
+}
+
+.wcc-select-search:focus {
+    border-color: var(--wcc-brand-primary);
+}
+
+.wcc-select-options {
+    max-height: 240px;
+    overflow-y: auto;
+}
+
+.wcc-select-option {
+    padding: 10px 16px;
+    font-size: 15px;
+    color: var(--wcc-text-main);
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.wcc-select-option:hover {
+    background: #f1f5f9;
+    color: var(--wcc-brand-primary);
+}
+
+.wcc-select-option.selected {
+    background: #fff7ed;
+    color: var(--wcc-brand-primary);
+    font-weight: 600;
+}
+
+/* Scrollbar Styling */
+.wcc-select-options::-webkit-scrollbar {
+    width: 6px;
+}
+
+.wcc-select-options::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+.wcc-select-options::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 3px;
+}
+
+.ui-datepicker-month {
+    float: left;
+}
+
+.ui-datepicker-year {
+    float: right;
+}
+
+/* ============================================
+   AI Analysis Result Block
+   ============================================ */
+.wcc-ai-analysis {
+    background: linear-gradient(135deg, #fff 0%, #fff7ed 100%);
+    border: 1px solid rgba(141, 28, 52, 0.2);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+    box-shadow: 0 4px 15px rgba(141, 28, 52, 0.05);
+    text-align: left;
+}
+
+.wcc-ai-analysis h3 {
+    color: var(--wcc-brand-primary);
+    font-size: 18px;
+    margin: 0 0 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wcc-ai-analysis h3::before {
+    content: "✨";
+    /* AI sparkle icon */
+    font-size: 20px;
+}
+
+.wcc-ai-analysis p {
+    color: var(--wcc-text-main);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ============================================
+   Processing Animation
+   ============================================ */
+.wcc-processing-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    backdrop-filter: blur(5px);
+    border-radius: var(--wcc-radius-lg);
+
+    /* Toggle State */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s;
+    pointer-events: none;
+}
+
+.wcc-processing-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+}
+
+.wcc-pulse-ring {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: var(--wcc-brand-primary);
+    position: relative;
+    animation: pulseRing 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 10px 25px -5px rgba(141, 28, 52, 0.4);
+}
+
+.wcc-pulse-ring::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--wcc-brand-primary);
+    animation: pulseRingFade 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.wcc-processing-text {
+    margin-top: 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--wcc-text-muted);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    animation: fadeText 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseRing {
+    0% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(141, 28, 52, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 20px rgba(141, 28, 52, 0);
+    }
+
+    100% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(141, 28, 52, 0);
+    }
+}
+
+@keyframes pulseRingFade {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeText {
+    from {
+        opacity: 0.5;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
