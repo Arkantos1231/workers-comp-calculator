@@ -3,7 +3,7 @@
  * Plugin Name: Workers' Comp Calculator
  * Plugin URI: https://pinderplotkin.com
  * Description: Una sofisticada Calculadora de Valor de Liquidación de Compensación Laboral con enrutamiento específico por estado y cálculos basados en IA.
- * Version: 1.3.19.3
+ * Version: 1.5.15.3
  * Author: Punit Advani and Julian Obando
  * Author URI: https://pinderplotkin.com
  * License: GPL v2 or later
