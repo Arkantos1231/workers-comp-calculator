@@ -1,0 +1,11 @@
+# Kept in the repo, but excluded from the zip WordPress installs
+.gitattributes export-ignore
+.gitignore export-ignore
+.env.example export-ignore
+deploy.js export-ignore
+package.json export-ignore
+package-lock.json export-ignore
+*.jsx export-ignore
+*-prompt.md export-ignore
+CUSTOM-POST-TYPE-GUIDE.md export-ignore
+assets/knowledgebase export-ignore
