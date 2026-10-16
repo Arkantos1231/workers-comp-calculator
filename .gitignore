@@ -1,0 +1,5 @@
+.env
+node_modules/
+ghl_debug.log
+*.log
+.claude/
